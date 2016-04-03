@@ -1,0 +1,13 @@
+{
+    "name": "scrape-court-lists",
+    "private": true,
+    "dependencies": {
+        "highland": "2.5.x",
+        "request": "2.67.x",
+        "cheerio": "0.19.x",
+        "csv-write-stream": "1.0.x"
+    },
+    "scripts": {
+        "start": "node court-lists"
+    }
+}
