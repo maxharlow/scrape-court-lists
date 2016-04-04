@@ -1,13 +1,14 @@
 {
-    "name": "scrape-court-lists",
+    "name": "scrape-xhibit",
     "private": true,
     "dependencies": {
         "highland": "2.5.x",
         "request": "2.67.x",
         "cheerio": "0.19.x",
+        "ent": "2.2.x",
         "csv-write-stream": "1.0.x"
     },
     "scripts": {
-        "start": "node court-lists"
+        "start": "node xhibit"
     }
 }

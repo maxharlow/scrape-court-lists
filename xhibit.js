@@ -1,6 +1,7 @@
 const Highland = require('highland')
 const Request = require('request')
 const Cheerio = require('cheerio')
+const Ent = require('ent')
 const FS = require('fs')
 const CSVWriter = require('csv-write-stream')
 
@@ -38,7 +39,7 @@ function listing(response) {
                 lastUpdated: document('h2 + p').text(),
                 court: court('td:nth-of-type(1)').text().trim(),
                 caseNumbers: court('td:nth-of-type(2)').html().split('<br>').filter(x => x !== '\n').join(', '),
-                name: court('td:nth-of-type(3)').html().replace(/ +/g, ' ').split('<br>').filter(x => x !== '\n').map(x => x.trim()).join(', '),
+                name: court('td:nth-of-type(3)').html().replace(/ +/g, ' ').split('<br>').filter(x => x !== '\n').map(x => Ent.decode(x.trim())).join(', '),
                 currentStatus: currentStatus === '-  No Information To Display -' ? '' : currentStatus
             }
         })
@@ -53,4 +54,4 @@ Highland([location])
     .flatten()
     .errors(e => console.log(e.stack))
     .through(CSVWriter())
-    .pipe(FS.createWriteStream('court-lists.csv'))
+    .pipe(FS.createWriteStream('xhibit.csv'))
